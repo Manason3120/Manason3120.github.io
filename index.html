@@ -88,8 +88,9 @@ button{
     </div>
 
     <div class="top-buttons">
-        <button class="login-btn">Login</button>
-        <button class="register-btn">Register</button>
+        <button class="login-btn" onclick="goLogin()">Login</button>
+<button class="register-btn" onclick="goRegister()">Register</button>
+
         <button class="lang-btn">🌍</button>
     </div>
 </div>
@@ -102,3 +103,12 @@ button{
 
 </body>
 </html>
+<script>
+function goLogin(){
+    window.location.href = "login.html";
+}
+
+function goRegister(){
+    window.location.href = "register.html";
+}
+</script>
