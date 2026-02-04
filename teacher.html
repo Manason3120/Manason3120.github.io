@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>Teacher Dashboard</title>
+
 <style>
 body{
     background:#121212;
@@ -10,27 +10,105 @@ body{
     font-family:Arial;
     text-align:center;
 }
+
+input,button{
+    padding:10px;
+    margin:8px;
+    border:none;
+    border-radius:6px;
+}
+
+button{
+    background:#4CAF50;
+    color:white;
+    cursor:pointer;
+}
+
+.class-box{
+    border:1px solid #444;
+    margin:10px auto;
+    padding:10px;
+    width:250px;
+    background:#1f1f1f;
+}
 </style>
+
 </head>
 
 <body>
-<script>
-
-let teacher = JSON.parse(localStorage.getItem("teacherAccount"));
-
-if(teacher){
-    document.write("<h2>Welcome " + teacher.name + "</h2>");
-}
-
-</script>
 
 <h1>Teacher Dashboard</h1>
 
-<p>Welcome Dungeon Master</p>
+<h2 id="welcome"></h2>
 
-<button>Create Class</button>
-<button>Build Dungeon</button>
-<button>View Students</button>
+<h3>Create New Class</h3>
+
+<input id="className" placeholder="Class Name">
+<br>
+<button onclick="createClass()">Create Class</button>
+
+<hr>
+
+<h3>Your Classes</h3>
+
+<div id="classList"></div>
+
+<script>
+
+// ===== Load teacher name =====
+let teacher = JSON.parse(localStorage.getItem("teacherAccount"));
+
+if(teacher){
+    document.getElementById("welcome").innerText = "Welcome " + teacher.name;
+}
+
+// ===== Load class list =====
+let classes = JSON.parse(localStorage.getItem("classList")) || [];
+
+function createClass(){
+
+    let name = document.getElementById("className").value;
+
+    if(name === "") return;
+
+    classes.push({
+        name:name,
+        id:Date.now()
+    });
+
+    localStorage.setItem("classList", JSON.stringify(classes));
+
+    renderClasses();
+}
+
+function renderClasses(){
+
+    let list = document.getElementById("classList");
+    list.innerHTML = "";
+
+    classes.forEach(c => {
+
+        let div = document.createElement("div");
+        div.className = "class-box";
+
+        div.innerHTML = `
+            <h4>${c.name}</h4>
+            <button onclick="openClass(${c.id})">Open</button>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+function openClass(id){
+
+    localStorage.setItem("currentClass", id);
+    alert("Class opened (next step = dungeon builder)");
+}
+
+renderClasses();
+
+</script>
 
 </body>
 </html>
