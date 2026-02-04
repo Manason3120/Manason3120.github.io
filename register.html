@@ -1,10 +1,83 @@
 <!DOCTYPE html>
 <html>
-<body style="background:black;color:white;text-align:center;padding-top:100px;">
+<head>
+<title>Register</title>
 
-<h1>REGISTER PAGE WORKING</h1>
+<style>
+body{
+    background:#121212;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding-top:80px;
+}
 
-<a href="teacher.html">Go Teacher</a>
+input, button{
+    padding:10px;
+    margin:8px;
+    width:220px;
+    border-radius:6px;
+    border:none;
+}
+
+button{
+    background:#2196F3;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+a{
+    color:#4CAF50;
+    text-decoration:none;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Teacher Registration</h1>
+
+<input id="name" placeholder="Full Name"><br>
+<input id="email" placeholder="Email"><br>
+<input id="password" type="password" placeholder="Password"><br>
+<input id="confirm" type="password" placeholder="Confirm Password"><br>
+
+<button onclick="register()">Register</button>
+
+<p>Already have an account? 
+<a href="login.html">Login here</a>
+</p>
+
+<script>
+
+function register(){
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let pass = document.getElementById("password").value;
+    let confirm = document.getElementById("confirm").value;
+
+    if(pass !== confirm){
+        alert("Passwords do not match!");
+        return;
+    }
+
+    // Fake save account (temporary local storage)
+    let teacher = {
+        name:name,
+        email:email
+    };
+
+    localStorage.setItem("teacherAccount", JSON.stringify(teacher));
+
+    alert("Registration successful!");
+
+    window.location.href = "teacher.html";
+}
+
+</script>
 
 </body>
 </html>
