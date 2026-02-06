@@ -23,3 +23,14 @@ const StorageManager = {
 };
 
 StorageManager.init();
+setCurrentTeacher(id){
+    localStorage.setItem("DC_CURRENT_TEACHER", id);
+},
+
+getCurrentTeacher(){
+    return localStorage.getItem("DC_CURRENT_TEACHER");
+},
+
+logout(){
+    localStorage.removeItem("DC_CURRENT_TEACHER");
+}
