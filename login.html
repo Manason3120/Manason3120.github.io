@@ -54,7 +54,7 @@ function login(){
         localStorage.setItem("currentUser", JSON.stringify(user));
 
         alert("Login success");
-
+StorageManager.setCurrentTeacher(username);
         window.location.href = "dashboard.html";
 
     } else {
