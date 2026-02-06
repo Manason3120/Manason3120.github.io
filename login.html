@@ -35,3 +35,31 @@ function goTeacher(){
 </body>
 </html>
 
+<script>
+function login(){
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const db = StorageManager.getDB();
+
+    const user = db.users.find(u => 
+        u.username === username && 
+        u.password === password
+    );
+
+    if(user){
+
+        // Lưu session
+        localStorage.setItem("currentUser", JSON.stringify(user));
+
+        alert("Login success");
+
+        window.location.href = "dashboard.html";
+
+    } else {
+        alert("Wrong username or password");
+    }
+
+}
+</script>
